@@ -270,12 +270,17 @@ class NodeVisitor extends NodeVisitorAbstract
                 $property->setTags($comment->getOtherTags());
             }
 
-            if ($this->context->getFilter()->acceptProperty($property)) {
-                $this->context->getClass()->addProperty($property);
+            $property->setDefault($prop->default);
 
                 if ($errors) {
                     $this->context->addErrors((string) $property, $prop->getLine(), $errors);
                 }
+
+                $property->setTags($comment->getOtherTags());
+            }
+            
+            if ($this->context->getFilter()->acceptProperty($property)) {
+                $this->context->getClass()->addProperty($property);
             }
         }
     }
