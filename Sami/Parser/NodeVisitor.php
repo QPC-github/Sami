@@ -211,6 +211,8 @@ class NodeVisitor extends NodeVisitorAbstract
         }
 
         $method->setErrors($errors);
+        
+        $method->setClass($this->context->getClass());
 
         $returnType = $node->getReturnType();
         $returnTypeStr = null;
@@ -278,6 +280,8 @@ class NodeVisitor extends NodeVisitorAbstract
 
                 $property->setTags($comment->getOtherTags());
             }
+            
+            $property->setClass($this->context->getClass());
             
             if ($this->context->getFilter()->acceptProperty($property)) {
                 $this->context->getClass()->addProperty($property);
